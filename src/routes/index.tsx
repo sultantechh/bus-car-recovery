@@ -163,9 +163,15 @@ function Home() {
                 <Search className="h-4 w-4" /> SEARCH BUS
               </button>
             </form>
+            <datalist id="buscar-cities">
+              {cities.map((c) => (
+                <option key={c.id} value={c.city_name} />
+              ))}
+            </datalist>
           </div>
         </div>
       </section>
+
 
       {/* Amenities */}
       <section className="mx-auto max-w-6xl px-4 mt-16">
