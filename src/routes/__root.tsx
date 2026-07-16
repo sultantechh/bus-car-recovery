@@ -77,14 +77,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "BusCar — Eagle Above the Rest" },
+      { name: "description", content: "BusCar — luxury coach travel across Kenya. Book tickets, print, and manage your journey online." },
+      { property: "og:title", content: "BusCar — Eagle Above the Rest" },
+      { property: "og:description", content: "Luxury coaches across Kenya. Book online in seconds." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: "@Lovable" },
     ],
     links: [
       {
