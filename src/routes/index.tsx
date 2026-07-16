@@ -1,8 +1,11 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { useServerFn } from "@tanstack/react-start";
+import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { Bus, MapPin, Calendar, Search } from "lucide-react";
 import { SiteLayout } from "@/components/site/Layout";
 import { img } from "@/lib/assets";
+import { getCities, type City } from "@/lib/iabiri.functions";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -47,10 +50,39 @@ function Home() {
   const today = new Date().toISOString().slice(0, 10);
   const [date, setDate] = useState(today);
 
+  const fetchCities = useServerFn(getCities);
+  const { data: cities = [] } = useQuery({
+    queryKey: ["cities"],
+    queryFn: () => fetchCities(),
+    staleTime: 60 * 60_000,
+  });
+
+  const findCity = (name: string): City | undefined => {
+    const n = name.trim().toUpperCase();
+    if (!n) return undefined;
+    return (
+      cities.find((c) => c.city_name.toUpperCase() === n) ??
+      cities.find((c) => c.city_name.toUpperCase().startsWith(n)) ??
+      cities.find((c) => c.city_name.toUpperCase().includes(n))
+    );
+  };
+
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
-    navigate({ to: "/search", search: { from, to, date } });
+    const src = findCity(from);
+    const dst = findCity(to);
+    navigate({
+      to: "/search",
+      search: {
+        from: src?.city_name ?? from,
+        to: dst?.city_name ?? to,
+        date,
+        source_id: src ? Number(src.id) : 0,
+        destination_id: dst ? Number(dst.id) : 0,
+      },
+    });
   };
+
 
   return (
     <SiteLayout>
@@ -101,7 +133,8 @@ function Home() {
                 <input
                   value={from}
                   onChange={(e) => setFrom(e.target.value)}
-                  placeholder="Source"
+                  placeholder="Source city"
+                  list="buscar-cities"
                   className="w-full outline-none text-sm font-medium bg-transparent"
                 />
               </Field>
@@ -109,10 +142,12 @@ function Home() {
                 <input
                   value={to}
                   onChange={(e) => setTo(e.target.value)}
-                  placeholder="Destination"
+                  placeholder="Destination city"
+                  list="buscar-cities"
                   className="w-full outline-none text-sm font-medium bg-transparent"
                 />
               </Field>
+
               <Field icon={<Calendar className="h-4 w-4" />} label="TRAVEL DATE">
                 <input
                   type="date"
@@ -128,9 +163,15 @@ function Home() {
                 <Search className="h-4 w-4" /> SEARCH BUS
               </button>
             </form>
+            <datalist id="buscar-cities">
+              {cities.map((c) => (
+                <option key={c.id} value={c.city_name} />
+              ))}
+            </datalist>
           </div>
         </div>
       </section>
+
 
       {/* Amenities */}
       <section className="mx-auto max-w-6xl px-4 mt-16">
