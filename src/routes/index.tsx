@@ -133,7 +133,8 @@ function Home() {
                 <input
                   value={from}
                   onChange={(e) => setFrom(e.target.value)}
-                  placeholder="Source"
+                  placeholder="Source city"
+                  list="buscar-cities"
                   className="w-full outline-none text-sm font-medium bg-transparent"
                 />
               </Field>
@@ -141,10 +142,12 @@ function Home() {
                 <input
                   value={to}
                   onChange={(e) => setTo(e.target.value)}
-                  placeholder="Destination"
+                  placeholder="Destination city"
+                  list="buscar-cities"
                   className="w-full outline-none text-sm font-medium bg-transparent"
                 />
               </Field>
+
               <Field icon={<Calendar className="h-4 w-4" />} label="TRAVEL DATE">
                 <input
                   type="date"
