@@ -50,10 +50,39 @@ function Home() {
   const today = new Date().toISOString().slice(0, 10);
   const [date, setDate] = useState(today);
 
+  const fetchCities = useServerFn(getCities);
+  const { data: cities = [] } = useQuery({
+    queryKey: ["cities"],
+    queryFn: () => fetchCities(),
+    staleTime: 60 * 60_000,
+  });
+
+  const findCity = (name: string): City | undefined => {
+    const n = name.trim().toUpperCase();
+    if (!n) return undefined;
+    return (
+      cities.find((c) => c.city_name.toUpperCase() === n) ??
+      cities.find((c) => c.city_name.toUpperCase().startsWith(n)) ??
+      cities.find((c) => c.city_name.toUpperCase().includes(n))
+    );
+  };
+
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
-    navigate({ to: "/search", search: { from, to, date } });
+    const src = findCity(from);
+    const dst = findCity(to);
+    navigate({
+      to: "/search",
+      search: {
+        from: src?.city_name ?? from,
+        to: dst?.city_name ?? to,
+        date,
+        source_id: src ? Number(src.id) : 0,
+        destination_id: dst ? Number(dst.id) : 0,
+      },
+    });
   };
+
 
   return (
     <SiteLayout>
