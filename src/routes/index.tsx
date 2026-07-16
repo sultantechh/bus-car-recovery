@@ -1,7 +1,7 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { useQuery } from "@tanstack/react-query";
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { Bus, MapPin, Calendar, Search } from "lucide-react";
 import { SiteLayout } from "@/components/site/Layout";
 import { img } from "@/lib/assets";
