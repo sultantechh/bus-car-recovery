@@ -1,7 +1,8 @@
 import { Link } from "@tanstack/react-router";
-import { HelpCircle, Menu, X } from "lucide-react";
+import { HelpCircle, Menu, X, MessageCircle } from "lucide-react";
 import { useState } from "react";
 import { img } from "@/lib/assets";
+import { waLink, WHATSAPP_DISPLAY } from "@/lib/whatsapp";
 
 const nav = [
   { to: "/", label: "Home" },
@@ -48,9 +49,14 @@ export function Header() {
           >
             <HelpCircle className="h-4 w-4" /> Support
           </Link>
-          <button className="rounded-full bg-slate-900 px-5 py-2 text-sm font-semibold text-white hover:bg-slate-800">
-            My Account
-          </button>
+          <a
+            href={waLink("Hi BusCar, I'd like to book a ticket.")}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-1.5 rounded-full bg-emerald-600 px-4 py-2 text-sm font-semibold text-white hover:bg-emerald-700"
+          >
+            <MessageCircle className="h-4 w-4" /> Book: {WHATSAPP_DISPLAY}
+          </a>
         </div>
 
         <button
@@ -82,9 +88,15 @@ export function Header() {
             >
               Support
             </Link>
-            <button className="mt-2 rounded-full bg-slate-900 px-5 py-2 text-sm font-semibold text-white">
-              My Account
-            </button>
+            <a
+              href={waLink("Hi BusCar, I'd like to book a ticket.")}
+              target="_blank"
+              rel="noreferrer"
+              onClick={() => setOpen(false)}
+              className="mt-2 inline-flex items-center justify-center gap-2 rounded-full bg-emerald-600 px-5 py-2.5 text-sm font-semibold text-white"
+            >
+              <MessageCircle className="h-4 w-4" /> Book on WhatsApp {WHATSAPP_DISPLAY}
+            </a>
           </div>
         </div>
       )}

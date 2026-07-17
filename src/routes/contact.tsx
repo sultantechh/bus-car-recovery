@@ -1,6 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
+import { MessageCircle } from "lucide-react";
 import { SiteLayout } from "@/components/site/Layout";
+import { waLink, WHATSAPP_DISPLAY } from "@/lib/whatsapp";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -57,6 +59,25 @@ const OFFICES: [string, string][] = [
 
 function Contact() {
   const [sent, setSent] = useState(false);
+  const [form, setForm] = useState({
+    first: "",
+    last: "",
+    email: "",
+    mobile: "",
+    subject: "",
+    message: "",
+  });
+  const set = (k: keyof typeof form) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
+    setForm((f) => ({ ...f, [k]: e.target.value }));
+
+  const submit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const text =
+      `Hi BusCar,\n\nName: ${form.first} ${form.last}\nEmail: ${form.email}\nMobile: ${form.mobile}\n` +
+      `Subject: ${form.subject}\n\n${form.message}`;
+    window.open(waLink(text), "_blank");
+    setSent(true);
+  };
   return (
     <SiteLayout>
       {/* Banner */}
@@ -93,32 +114,28 @@ function Contact() {
             </div>
           </div>
 
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              setSent(true);
-            }}
-            className="grid gap-4"
-          >
-            <div className="grid grid-cols-2 gap-4">
-              <Input label="First Name" placeholder="Enter first name" required />
-              <Input label="Last Name" placeholder="Enter last name" required />
-              <Input label="Email Address" type="email" placeholder="Enter email address" required />
-              <Input label="Mobile Number" placeholder="Enter mobile number" required />
+          <form onSubmit={submit} className="grid gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <Input label="First Name" placeholder="Enter first name" required value={form.first} onChange={set("first")} />
+              <Input label="Last Name" placeholder="Enter last name" required value={form.last} onChange={set("last")} />
+              <Input label="Email Address" type="email" placeholder="Enter email address" required value={form.email} onChange={set("email")} />
+              <Input label="Mobile Number" placeholder="Enter mobile number" required value={form.mobile} onChange={set("mobile")} />
             </div>
-            <Input label="Subject" placeholder="Enter subject of enquiry / your message" />
+            <Input label="Subject" placeholder="Enter subject of enquiry / your message" value={form.subject} onChange={set("subject")} />
             <div>
               <label className="text-xs font-medium text-slate-600">Message</label>
               <textarea
                 rows={4}
+                value={form.message}
+                onChange={set("message")}
                 placeholder="Your message"
                 className="mt-1 w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm outline-none focus:border-slate-900"
               />
             </div>
-            <button className="justify-self-start rounded-full bg-slate-800 px-6 py-2.5 text-sm font-semibold text-white hover:bg-slate-900">
-              Send Message
+            <button className="inline-flex items-center justify-center gap-2 rounded-full bg-emerald-600 px-6 py-2.5 text-sm font-semibold text-white hover:bg-emerald-700 w-full sm:w-auto sm:justify-self-start">
+              <MessageCircle className="h-4 w-4" /> Send on WhatsApp {WHATSAPP_DISPLAY}
             </button>
-            {sent && <p className="text-sm text-emerald-600">Message sent — we'll get back to you shortly.</p>}
+            {sent && <p className="text-sm text-emerald-600">Opening WhatsApp — finish sending your message there.</p>}
           </form>
         </div>
       </section>
