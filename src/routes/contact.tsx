@@ -1,6 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
+import { MessageCircle } from "lucide-react";
 import { SiteLayout } from "@/components/site/Layout";
+import { waLink, WHATSAPP_DISPLAY } from "@/lib/whatsapp";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -57,6 +59,25 @@ const OFFICES: [string, string][] = [
 
 function Contact() {
   const [sent, setSent] = useState(false);
+  const [form, setForm] = useState({
+    first: "",
+    last: "",
+    email: "",
+    mobile: "",
+    subject: "",
+    message: "",
+  });
+  const set = (k: keyof typeof form) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
+    setForm((f) => ({ ...f, [k]: e.target.value }));
+
+  const submit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const text =
+      `Hi BusCar,\n\nName: ${form.first} ${form.last}\nEmail: ${form.email}\nMobile: ${form.mobile}\n` +
+      `Subject: ${form.subject}\n\n${form.message}`;
+    window.open(waLink(text), "_blank");
+    setSent(true);
+  };
   return (
     <SiteLayout>
       {/* Banner */}
