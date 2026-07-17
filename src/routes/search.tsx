@@ -152,7 +152,13 @@ function SearchPage() {
 
         <div className="space-y-4">
           {trips.map((t) => (
-            <TripCard key={t.bus_id + t.route_id} trip={t} />
+            <TripCard
+              key={t.bus_id + t.route_id}
+              trip={t}
+              from={from}
+              to={to}
+              date={date}
+            />
           ))}
         </div>
       </div>
