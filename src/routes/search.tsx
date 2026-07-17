@@ -183,15 +183,31 @@ function TripCard({
     .map((s) => s.trim())
     .filter((s) => AMENITY_LABELS[s]);
   const cheapest = money(trip.ticket_amount);
-  const bookMessage =
-    `Hi BusCar, I'd like to book a seat.\n\n` +
-    `Route: ${from || "?"} → ${to || "?"}\n` +
-    `Date: ${date || "?"}\n` +
-    `Bus: ${trip.bus_title} (${trip.bus_type})\n` +
-    `Departure: ${trip.departure_time}\n` +
-    `Trip code: ${trip.trip_code}\n` +
-    (cheapest ? `Fare from: ${cheapest}\n` : "") +
-    `\nPlease confirm availability and seat selection.`;
+  const prettyDate = (() => {
+    if (!date) return "?";
+    const d = new Date(date);
+    return isNaN(d.getTime())
+      ? date
+      : d.toLocaleDateString("en-GB", {
+          weekday: "short",
+          day: "2-digit",
+          month: "short",
+          year: "numeric",
+        });
+  })();
+  const bookMessage = [
+    "*BusCar Booking Request* 🚌",
+    "",
+    `*From:* ${from || "?"}`,
+    `*To:* ${to || "?"}`,
+    `*Travel Date:* ${prettyDate}`,
+    `*Departure:* ${trip.departure_time}`,
+    `*Bus:* ${trip.bus_title} — ${trip.bus_type}`,
+    `*Trip ID:* ${trip.trip_code}`,
+    `*Total Price:* ${cheapest ?? "TBC"}`,
+    "",
+    "Please confirm my seat and payment details. Thank you!",
+  ].join("\n");
 
   return (
     <div className="rounded-2xl border border-slate-200 bg-white p-4 sm:p-5 shadow-sm hover:shadow-md transition">
