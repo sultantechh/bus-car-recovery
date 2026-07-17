@@ -88,7 +88,7 @@ function Home() {
     <SiteLayout>
       {/* Hero */}
       <section className="relative">
-        <div className="grid grid-cols-1 md:grid-cols-2 h-[420px] md:h-[520px]">
+        <div className="grid grid-cols-2 h-[260px] sm:h-[380px] md:h-[520px]">
           <img src={img.hero1} alt="BusCar coach" className="h-full w-full object-cover" />
           <img src={img.hero2} alt="BusCar coach" className="h-full w-full object-cover" />
         </div>
