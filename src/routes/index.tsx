@@ -233,6 +233,57 @@ function Home() {
         </div>
       </section>
 
+      {/* Popular Routes */}
+      <section className="mx-auto max-w-6xl px-4 mt-16">
+        <h2 className="text-2xl font-bold">Popular Routes</h2>
+        <p className="text-sm text-slate-500 mt-1">
+          Book any of our top routes across Kenya
+        </p>
+        <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {popularRoutes.map((r) => (
+            <button
+              key={`${r.from}-${r.to}`}
+              onClick={() =>
+                navigate({
+                  to: "/search",
+                  search: {
+                    from: r.from,
+                    to: r.to,
+                    date,
+                    source_id: r.source_id,
+                    destination_id: r.destination_id,
+                  },
+                })
+              }
+              className="group text-left rounded-2xl border border-slate-200 p-5 hover:border-[#c8102e] hover:shadow-md transition"
+            >
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2 text-sm font-semibold text-slate-900">
+                  <MapPin className="h-4 w-4 text-[#c8102e]" />
+                  {r.from}
+                  <span className="text-slate-400">→</span>
+                  {r.to}
+                </div>
+                <span className="text-xs text-slate-500">{r.duration}</span>
+              </div>
+              <div className="mt-3 flex items-end justify-between">
+                <div>
+                  <div className="text-[10px] font-semibold tracking-wider text-slate-500">
+                    FROM
+                  </div>
+                  <div className="text-lg font-bold text-slate-900">
+                    KES {r.price}
+                  </div>
+                </div>
+                <span className="inline-flex items-center gap-1 rounded-full bg-slate-900 px-3 py-1.5 text-xs font-semibold text-white group-hover:bg-[#c8102e]">
+                  Book
+                </span>
+              </div>
+            </button>
+          ))}
+        </div>
+      </section>
+
       {/* Promo */}
       <section className="mx-auto max-w-6xl px-4 mt-16">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
