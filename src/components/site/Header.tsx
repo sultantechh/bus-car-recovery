@@ -1,7 +1,8 @@
 import { Link } from "@tanstack/react-router";
-import { HelpCircle, Menu, X } from "lucide-react";
+import { HelpCircle, Menu, X, MessageCircle } from "lucide-react";
 import { useState } from "react";
 import { img } from "@/lib/assets";
+import { waLink, WHATSAPP_DISPLAY } from "@/lib/whatsapp";
 
 const nav = [
   { to: "/", label: "Home" },
