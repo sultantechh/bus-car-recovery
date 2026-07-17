@@ -60,9 +60,9 @@ function categorizePrices(list: Trip["defaultTripPriceList"]) {
 }
 
 function money(amount?: string) {
-  if (!amount) return null;
-  const n = Number(amount);
-  return `KES ${Math.round(n).toLocaleString()}`;
+  const n = discounted(amount);
+  if (n === null) return null;
+  return `KES ${n.toLocaleString()}`;
 }
 
 function SearchPage() {
