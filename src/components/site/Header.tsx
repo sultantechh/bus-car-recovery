@@ -88,9 +88,15 @@ export function Header() {
             >
               Support
             </Link>
-            <button className="mt-2 rounded-full bg-slate-900 px-5 py-2 text-sm font-semibold text-white">
-              My Account
-            </button>
+            <a
+              href={waLink("Hi BusCar, I'd like to book a ticket.")}
+              target="_blank"
+              rel="noreferrer"
+              onClick={() => setOpen(false)}
+              className="mt-2 inline-flex items-center justify-center gap-2 rounded-full bg-emerald-600 px-5 py-2.5 text-sm font-semibold text-white"
+            >
+              <MessageCircle className="h-4 w-4" /> Book on WhatsApp {WHATSAPP_DISPLAY}
+            </a>
           </div>
         </div>
       )}
