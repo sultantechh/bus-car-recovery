@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
-import { Facebook, Twitter, Linkedin, Instagram, Mail } from "lucide-react";
+import { Facebook, Twitter, Linkedin, Instagram, Mail, MessageCircle, Phone } from "lucide-react";
 import { img } from "@/lib/assets";
+import { waLink, WHATSAPP_DISPLAY, WHATSAPP_NUMBER } from "@/lib/whatsapp";
 
 export function Footer() {
   return (
