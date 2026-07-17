@@ -42,6 +42,21 @@ const why = [
   { title: "Widest Network", icon: "routes2", text: "Connecting Mombasa, Nairobi, Kisumu, Eldoret, Malindi, Lamu and more." },
 ] as const;
 
+const popularRoutes = [
+  { from: "Nairobi", to: "Mombasa", price: "1,200", duration: "8h", source_id: 1, destination_id: 2 },
+  { from: "Nairobi", to: "Kisumu", price: "1,000", duration: "6h", source_id: 1, destination_id: 3 },
+  { from: "Nairobi", to: "Eldoret", price: "900", duration: "5h", source_id: 1, destination_id: 4 },
+  { from: "Nairobi", to: "Malindi", price: "1,500", duration: "10h", source_id: 1, destination_id: 5 },
+  { from: "Mombasa", to: "Nairobi", price: "1,200", duration: "8h", source_id: 2, destination_id: 1 },
+  { from: "Mombasa", to: "Malindi", price: "500", duration: "2h", source_id: 2, destination_id: 5 },
+  { from: "Mombasa", to: "Lamu", price: "1,300", duration: "7h", source_id: 2, destination_id: 6 },
+  { from: "Kisumu", to: "Nairobi", price: "1,000", duration: "6h", source_id: 3, destination_id: 1 },
+  { from: "Kisumu", to: "Eldoret", price: "600", duration: "3h", source_id: 3, destination_id: 4 },
+  { from: "Eldoret", to: "Nairobi", price: "900", duration: "5h", source_id: 4, destination_id: 1 },
+  { from: "Eldoret", to: "Kisumu", price: "600", duration: "3h", source_id: 4, destination_id: 3 },
+  { from: "Malindi", to: "Mombasa", price: "500", duration: "2h", source_id: 5, destination_id: 2 },
+] as const;
+
 function Home() {
   const navigate = useNavigate();
   const [trip, setTrip] = useState<"one" | "round">("one");
@@ -214,6 +229,57 @@ function Home() {
                 <p className="mt-1 text-sm text-slate-600">{w.text}</p>
               </div>
             </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Popular Routes */}
+      <section className="mx-auto max-w-6xl px-4 mt-16">
+        <h2 className="text-2xl font-bold">Popular Routes</h2>
+        <p className="text-sm text-slate-500 mt-1">
+          Book any of our top routes across Kenya
+        </p>
+        <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {popularRoutes.map((r) => (
+            <button
+              key={`${r.from}-${r.to}`}
+              onClick={() =>
+                navigate({
+                  to: "/search",
+                  search: {
+                    from: r.from,
+                    to: r.to,
+                    date,
+                    source_id: r.source_id,
+                    destination_id: r.destination_id,
+                  },
+                })
+              }
+              className="group text-left rounded-2xl border border-slate-200 p-5 hover:border-[#c8102e] hover:shadow-md transition"
+            >
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2 text-sm font-semibold text-slate-900">
+                  <MapPin className="h-4 w-4 text-[#c8102e]" />
+                  {r.from}
+                  <span className="text-slate-400">→</span>
+                  {r.to}
+                </div>
+                <span className="text-xs text-slate-500">{r.duration}</span>
+              </div>
+              <div className="mt-3 flex items-end justify-between">
+                <div>
+                  <div className="text-[10px] font-semibold tracking-wider text-slate-500">
+                    FROM
+                  </div>
+                  <div className="text-lg font-bold text-slate-900">
+                    KES {r.price}
+                  </div>
+                </div>
+                <span className="inline-flex items-center gap-1 rounded-full bg-slate-900 px-3 py-1.5 text-xs font-semibold text-white group-hover:bg-[#c8102e]">
+                  Book
+                </span>
+              </div>
+            </button>
           ))}
         </div>
       </section>
