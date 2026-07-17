@@ -178,7 +178,7 @@ function TripCard({
   date: string;
 }) {
   const prices = categorizePrices(trip.defaultTripPriceList);
-  const amenities = trip.amenities
+  const amenities = (trip.amenities ?? "")
     .split(",")
     .map((s) => s.trim())
     .filter((s) => AMENITY_LABELS[s]);
