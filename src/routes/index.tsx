@@ -42,6 +42,21 @@ const why = [
   { title: "Widest Network", icon: "routes2", text: "Connecting Mombasa, Nairobi, Kisumu, Eldoret, Malindi, Lamu and more." },
 ] as const;
 
+const popularRoutes = [
+  { from: "Nairobi", to: "Mombasa", price: "1,200", duration: "8h", source_id: 1, destination_id: 2 },
+  { from: "Nairobi", to: "Kisumu", price: "1,000", duration: "6h", source_id: 1, destination_id: 3 },
+  { from: "Nairobi", to: "Eldoret", price: "900", duration: "5h", source_id: 1, destination_id: 4 },
+  { from: "Nairobi", to: "Malindi", price: "1,500", duration: "10h", source_id: 1, destination_id: 5 },
+  { from: "Mombasa", to: "Nairobi", price: "1,200", duration: "8h", source_id: 2, destination_id: 1 },
+  { from: "Mombasa", to: "Malindi", price: "500", duration: "2h", source_id: 2, destination_id: 5 },
+  { from: "Mombasa", to: "Lamu", price: "1,300", duration: "7h", source_id: 2, destination_id: 6 },
+  { from: "Kisumu", to: "Nairobi", price: "1,000", duration: "6h", source_id: 3, destination_id: 1 },
+  { from: "Kisumu", to: "Eldoret", price: "600", duration: "3h", source_id: 3, destination_id: 4 },
+  { from: "Eldoret", to: "Nairobi", price: "900", duration: "5h", source_id: 4, destination_id: 1 },
+  { from: "Eldoret", to: "Kisumu", price: "600", duration: "3h", source_id: 4, destination_id: 3 },
+  { from: "Malindi", to: "Mombasa", price: "500", duration: "2h", source_id: 5, destination_id: 2 },
+] as const;
+
 function Home() {
   const navigate = useNavigate();
   const [trip, setTrip] = useState<"one" | "round">("one");
