@@ -30,16 +30,18 @@ export function Footer() {
         </div>
         <div className="flex items-center justify-center md:justify-end gap-3">
           <a
-            href="#"
-            className="inline-flex items-center gap-2 rounded-md bg-neutral-800 px-3 py-2 text-xs font-medium"
+            href={waLink("Hi BusCar, I'd like to book a ticket.")}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-2 rounded-md bg-emerald-600 px-3 py-2 text-xs font-semibold text-white hover:bg-emerald-700"
           >
-            ▶ Google Play
+            <MessageCircle className="h-4 w-4" /> WhatsApp {WHATSAPP_DISPLAY}
           </a>
           <a
-            href="#"
-            className="inline-flex items-center gap-2 rounded-md bg-neutral-800 px-3 py-2 text-xs font-medium"
+            href={`tel:${WHATSAPP_NUMBER}`}
+            className="inline-flex items-center gap-2 rounded-md bg-neutral-800 px-3 py-2 text-xs font-medium hover:bg-neutral-700"
           >
-             App Store
+            <Phone className="h-4 w-4" /> Call
           </a>
         </div>
       </div>
