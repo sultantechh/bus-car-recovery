@@ -16,6 +16,7 @@ import {
 } from "lucide-react";
 import { SiteLayout } from "@/components/site/Layout";
 import { searchTrips, type Trip } from "@/lib/iabiri.functions";
+import { waLink, WHATSAPP_DISPLAY, discounted } from "@/lib/whatsapp";
 
 const searchSchema = z.object({
   from: fallback(z.string(), "").default(""),
