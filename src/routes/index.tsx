@@ -5,6 +5,7 @@ import { useState } from "react";
 import { Bus, MapPin, Calendar, Search } from "lucide-react";
 import { SiteLayout } from "@/components/site/Layout";
 import { img } from "@/lib/assets";
+import { SmartImage } from "@/components/site/SmartImage";
 import { getCities, type City } from "@/lib/iabiri.functions";
 
 export const Route = createFileRoute("/")({
@@ -104,7 +105,7 @@ function Home() {
       {/* Hero */}
       <section className="relative">
         <div className="grid grid-cols-2 h-[260px] sm:h-[380px] md:h-[520px] bg-slate-200">
-          <img
+          <SmartImage
             src={img.hero1}
             alt="BusCar coach"
             width={1400}
@@ -113,7 +114,7 @@ function Home() {
             decoding="async"
             className="h-full w-full object-cover"
           />
-          <img
+          <SmartImage
             src={img.hero2}
             alt="BusCar coach"
             width={1400}
