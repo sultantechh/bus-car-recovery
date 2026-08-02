@@ -1,4 +1,4 @@
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
@@ -301,11 +301,38 @@ function Home() {
         </div>
       </section>
 
-      {/* Promo */}
+      {/* Our Fleet — real photos */}
       <section className="mx-auto max-w-6xl px-4 mt-16">
+        <h2 className="text-2xl font-bold">Our Fleet</h2>
+        <p className="text-sm text-slate-500 mt-1">
+          Real photos of BusCar coaches and interiors
+        </p>
+        <div className="mt-6 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
+          {img.gallery.slice(0, 8).map((src, i) => (
+            <div key={src} className="aspect-[4/3] overflow-hidden rounded-xl bg-slate-100">
+              <SmartImage
+                src={src}
+                alt={`BusCar fleet photo ${i + 1}`}
+                loading="lazy"
+                decoding="async"
+                className="h-full w-full object-cover hover:scale-105 transition-transform duration-500"
+              />
+            </div>
+          ))}
+        </div>
+        <Link
+          to="/gallery"
+          className="mt-5 inline-flex rounded-full border border-slate-300 px-5 py-2 text-sm font-semibold hover:border-[#c8102e]"
+        >
+          View full gallery
+        </Link>
+      </section>
+
+      {/* Promo */}
+      <section className="mx-auto max-w-6xl px-4 mt-16 mb-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <img src={img.cta1} alt="Promo" className="w-full rounded-2xl object-cover" />
-          <img src={img.cta2} alt="Promo" className="w-full rounded-2xl object-cover" />
+          <SmartImage src={img.cta1} alt="BusCar promotion" loading="lazy" className="w-full rounded-2xl object-cover" />
+          <SmartImage src={img.cta2} alt="BusCar promotion" loading="lazy" className="w-full rounded-2xl object-cover" />
         </div>
       </section>
     </SiteLayout>
