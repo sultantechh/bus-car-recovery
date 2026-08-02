@@ -24,6 +24,7 @@ import g5 from "@/assets/buscar/gallery-5.jpg.asset.json";
 import g6 from "@/assets/buscar/gallery-6.jpg.asset.json";
 import g7 from "@/assets/buscar/gallery-7.jpg.asset.json";
 import g8 from "@/assets/buscar/gallery-8.jpg.asset.json";
+import g9 from "@/assets/buscar/gallery-9.jpg.asset.json";
 
 export const img = {
   logo: logo.url,
