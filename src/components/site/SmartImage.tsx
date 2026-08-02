@@ -65,6 +65,7 @@ export function SmartImage({ src, alt, maxRetries = 3, className, ...rest }: Pro
   return (
     <img
       key={url}
+      ref={imgRef}
       src={url}
       alt={alt}
       onError={onError}
