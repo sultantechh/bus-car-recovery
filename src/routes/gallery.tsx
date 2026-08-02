@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/site/Layout";
 import { img } from "@/lib/assets";
+import { SmartImage } from "@/components/site/SmartImage";
 
 export const Route = createFileRoute("/gallery")({
   head: () => ({
@@ -29,10 +30,12 @@ function Gallery() {
         </div>
         <div className="mt-10 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
           {img.gallery.map((src, i) => (
-            <div key={src} className="aspect-square overflow-hidden rounded-xl shadow-sm">
-              <img
+            <div key={src} className="aspect-square overflow-hidden rounded-xl shadow-sm bg-slate-100">
+              <SmartImage
                 src={src}
-                alt={`Gallery ${i + 1}`}
+                alt={`BusCar fleet photo ${i + 1}`}
+                loading="lazy"
+                decoding="async"
                 className="h-full w-full object-cover hover:scale-105 transition-transform duration-500"
               />
             </div>
