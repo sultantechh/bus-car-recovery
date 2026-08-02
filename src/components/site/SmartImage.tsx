@@ -16,6 +16,7 @@ export function SmartImage({ src, alt, maxRetries = 3, className, ...rest }: Pro
   const [attempt, setAttempt] = useState(0);
   const [failed, setFailed] = useState(false);
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const imgRef = useRef<HTMLImageElement | null>(null);
 
   useEffect(() => {
     setAttempt(0);
@@ -27,6 +28,16 @@ export function SmartImage({ src, alt, maxRetries = 3, className, ...rest }: Pro
       if (timer.current) clearTimeout(timer.current);
     };
   }, []);
+
+  // Catch loads that already failed before React attached the error handler
+  // (server-rendered markup, or an image finished while hydrating).
+  useEffect(() => {
+    const el = imgRef.current;
+    if (el && el.complete && el.naturalWidth === 0 && attempt < maxRetries) {
+      timer.current = setTimeout(() => setAttempt((a) => a + 1), 400);
+    }
+  }, [attempt, maxRetries]);
+
 
   const onError = () => {
     if (attempt >= maxRetries) {
