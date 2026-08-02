@@ -45,5 +45,5 @@ export const img = {
   travler: travler.url,
   uk: uk.url,
   support: support.url,
-  gallery: [g1.url, g2.url, g3.url, g4.url, g5.url, g6.url, g7.url, g8.url],
+  gallery: [g1.url, g2.url, g3.url, g4.url, g5.url, g6.url, g7.url, g8.url, g9.url],
 };
