@@ -5,22 +5,32 @@ type Props = React.ImgHTMLAttributes<HTMLImageElement> & {
   alt: string;
   /** Max automatic retries on load failure (default 3). */
   maxRetries?: number;
+  /** Wrapper class for the skeleton/blur container. */
+  wrapperClassName?: string;
 };
 
 /**
- * Image with automatic retry on load failure.
- * Useful on slow / flaky mobile networks where a request can be dropped.
- * Each retry appends a cache-busting param and backs off exponentially.
+ * Image with an elegant skeleton + blur-up placeholder and automatic retry
+ * on load failure (useful on slow / flaky mobile networks).
  */
-export function SmartImage({ src, alt, maxRetries = 3, className, ...rest }: Props) {
+export function SmartImage({
+  src,
+  alt,
+  maxRetries = 3,
+  className,
+  wrapperClassName,
+  ...rest
+}: Props) {
   const [attempt, setAttempt] = useState(0);
   const [failed, setFailed] = useState(false);
+  const [loaded, setLoaded] = useState(false);
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const imgRef = useRef<HTMLImageElement | null>(null);
 
   useEffect(() => {
     setAttempt(0);
     setFailed(false);
+    setLoaded(false);
   }, [src]);
 
   useEffect(() => {
@@ -29,15 +39,16 @@ export function SmartImage({ src, alt, maxRetries = 3, className, ...rest }: Pro
     };
   }, []);
 
-  // Catch loads that already failed before React attached the error handler
-  // (server-rendered markup, or an image finished while hydrating).
+  // Catch loads that already finished before React attached handlers
+  // (server-rendered markup, or an image completed while hydrating).
   useEffect(() => {
     const el = imgRef.current;
-    if (el && el.complete && el.naturalWidth === 0 && attempt < maxRetries) {
+    if (!el || !el.complete) return;
+    if (el.naturalWidth > 0) setLoaded(true);
+    else if (attempt < maxRetries) {
       timer.current = setTimeout(() => setAttempt((a) => a + 1), 400);
     }
   }, [attempt, maxRetries]);
-
 
   const onError = () => {
     if (attempt >= maxRetries) {
@@ -63,14 +74,25 @@ export function SmartImage({ src, alt, maxRetries = 3, className, ...rest }: Pro
   const url = attempt === 0 ? src : `${src}${src.includes("?") ? "&" : "?"}retry=${attempt}`;
 
   return (
-    <img
-      key={url}
-      ref={imgRef}
-      src={url}
-      alt={alt}
-      onError={onError}
-      className={className}
-      {...rest}
-    />
+    <span className={`relative block overflow-hidden ${wrapperClassName ?? className ?? ""}`}>
+      {!loaded && (
+        <span
+          aria-hidden
+          className="absolute inset-0 animate-pulse bg-gradient-to-br from-slate-200 via-slate-100 to-slate-200"
+        />
+      )}
+      <img
+        key={url}
+        ref={imgRef}
+        src={url}
+        alt={alt}
+        onError={onError}
+        onLoad={() => setLoaded(true)}
+        className={`${className ?? ""} transition-[filter,opacity] duration-500 ${
+          loaded ? "blur-0 opacity-100" : "blur-md opacity-0"
+        }`}
+        {...rest}
+      />
+    </span>
   );
 }
