@@ -52,6 +52,7 @@ export function Footer() {
             <Link to="/about" className="hover:text-white">About</Link>
             <Link to="/ticket" className="hover:text-white">Print Ticket</Link>
             <Link to="/contact" className="hover:text-white">Get In Touch</Link>
+            <Link to="/payment" className="hover:text-white">Payment</Link>
             <a href="#" className="hover:text-white">Terms</a>
             <a href="#" className="hover:text-white">Privacy Policy</a>
           </nav>
