@@ -1,6 +1,10 @@
 // Central WhatsApp booking contact.
-export const WHATSAPP_NUMBER = "254103177255"; // 0103 177255 in international format
-export const WHATSAPP_DISPLAY = "0103 177255";
+export const WHATSAPP_NUMBER = "254799260771"; // 0799 260771 in international format
+export const WHATSAPP_DISPLAY = "0799 260771";
+
+// Lipa na Pochi payment details.
+export const LIPA_NA_POCHI_NUMBER = "254799260771";
+export const LIPA_NA_POCHI_DISPLAY = "0799 260771";
 
 export function waLink(message: string) {
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
