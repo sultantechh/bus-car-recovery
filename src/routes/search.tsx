@@ -206,6 +206,8 @@ function TripCard({
     `*Trip ID:* ${trip.trip_code}`,
     `*Total Price:* ${cheapest ?? "TBC"}`,
     "",
+    `*Payment:* Lipa na Pochi to ${LIPA_NA_POCHI_DISPLAY}`,
+    "",
     "Please confirm my seat and payment details. Thank you!",
   ].join("\n");
 
@@ -295,17 +297,25 @@ function TripCard({
             20% OFF
           </span>
         </div>
-        <a
-          href={waLink(bookMessage)}
-          target="_blank"
-          rel="noreferrer"
-          className="inline-flex items-center justify-center gap-2 rounded-full bg-emerald-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-emerald-700"
-        >
-          <svg viewBox="0 0 24 24" className="h-4 w-4 fill-current" aria-hidden="true">
-            <path d="M20.5 3.5A11.9 11.9 0 0 0 12 0C5.4 0 .1 5.3.1 11.9c0 2.1.6 4.1 1.6 5.9L0 24l6.4-1.7a12 12 0 0 0 5.6 1.4h.01c6.6 0 11.9-5.3 11.9-11.9 0-3.2-1.2-6.2-3.4-8.3zM12 21.3h-.01a9.4 9.4 0 0 1-4.8-1.3l-.35-.2-3.8 1 1-3.7-.23-.38A9.5 9.5 0 1 1 21.5 12c0 5.24-4.27 9.3-9.5 9.3zm5.4-7c-.3-.15-1.75-.86-2-.96-.28-.1-.48-.15-.68.15-.2.3-.77.96-.94 1.16-.17.2-.34.22-.64.08a7.7 7.7 0 0 1-3.83-3.34c-.29-.5.29-.46.83-1.55.09-.2.05-.36-.02-.5-.08-.15-.68-1.63-.93-2.23-.24-.58-.5-.5-.68-.5H8a1.3 1.3 0 0 0-.94.44 3.9 3.9 0 0 0-1.2 2.9c0 1.71 1.24 3.36 1.41 3.59.17.22 2.44 3.73 5.9 5.23a19.8 19.8 0 0 0 1.97.73c.83.26 1.58.22 2.18.13.66-.1 2.03-.83 2.32-1.63.28-.8.28-1.48.2-1.62-.08-.15-.28-.23-.58-.38z" />
-          </svg>
-          Book on WhatsApp
-        </a>
+        <div className="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
+          <Link
+            to="/payment"
+            className="inline-flex items-center justify-center gap-2 rounded-full border border-emerald-600 px-5 py-2.5 text-sm font-semibold text-emerald-700 hover:bg-emerald-50"
+          >
+            Pay via Lipa na Pochi
+          </Link>
+          <a
+            href={waLink(bookMessage)}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center justify-center gap-2 rounded-full bg-emerald-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-emerald-700"
+          >
+            <svg viewBox="0 0 24 24" className="h-4 w-4 fill-current" aria-hidden="true">
+              <path d="M20.5 3.5A11.9 11.9 0 0 0 12 0C5.4 0 .1 5.3.1 11.9c0 2.1.6 4.1 1.6 5.9L0 24l6.4-1.7a12 12 0 0 0 5.6 1.4h.01c6.6 0 11.9-5.3 11.9-11.9 0-3.2-1.2-6.2-3.4-8.3zM12 21.3h-.01a9.4 9.4 0 0 1-4.8-1.3l-.35-.2-3.8 1 1-3.7-.23-.38A9.5 9.5 0 1 1 21.5 12c0 5.24-4.27 9.3-9.5 9.3zm5.4-7c-.3-.15-1.75-.86-2-.96-.28-.1-.48-.15-.68.15-.2.3-.77.96-.94 1.16-.17.2-.34.22-.64.08a7.7 7.7 0 0 1-3.83-3.34c-.29-.5.29-.46.83-1.55.09-.2.05-.36-.02-.5-.08-.15-.68-1.63-.93-2.23-.24-.58-.5-.5-.68-.5H8a1.3 1.3 0 0 0-.94.44 3.9 3.9 0 0 0-1.2 2.9c0 1.71 1.24 3.36 1.41 3.59.17.22 2.44 3.73 5.9 5.23a19.8 19.8 0 0 0 1.97.73c.83.26 1.58.22 2.18.13.66-.1 2.03-.83 2.32-1.63.28-.8.28-1.48.2-1.62-.08-.15-.28-.23-.58-.38z" />
+            </svg>
+            Book on WhatsApp
+          </a>
+        </div>
       </div>
     </div>
   );
