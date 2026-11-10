@@ -56,7 +56,7 @@ function Ticket() {
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
                 required
-                placeholder="e.g 0785700700"
+                placeholder="e.g 0103177255"
                 className="mt-1 w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-sm outline-none focus:border-slate-900"
               />
             </div>
