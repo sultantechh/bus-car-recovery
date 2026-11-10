@@ -15,7 +15,7 @@ export const Route = createFileRoute("/support")({
   component: Support,
 });
 
-const HEAD = ["0718127350", "0785700700", "0717073333/0731333888", "0709 832 302"];
+const HEAD = ["0103177255"];
 
 function Support() {
   return (
@@ -47,10 +47,10 @@ function Support() {
           </Card>
           <Card icon={<MessageCircle className="h-6 w-6" />} tint="bg-emerald-100 text-emerald-600" title="Chat on WhatsApp">
             <a
-              href="https://wa.me/254718127350"
+              href="https://wa.me/2547103177255"
               className="mt-3 inline-block text-sm text-emerald-700 font-medium"
             >
-              0718127350
+              0103177255
             </a>
           </Card>
           <Card icon={<Mail className="h-6 w-6" />} tint="bg-amber-100 text-amber-600" title="Email Us">
