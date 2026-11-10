@@ -17,8 +17,8 @@ export const Route = createFileRoute("/contact")({
 });
 
 const HEAD = [
-  ["0718127350", "0785700700"],
-  ["0717073333/0731333888", "0709 832 302"],
+  ["0103177255", "0103177255"],
+  
 ];
 
 const OFFICES: [string, string][] = [
